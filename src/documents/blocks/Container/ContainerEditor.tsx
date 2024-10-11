@@ -3,7 +3,7 @@ import React from 'react';
 import { Container as BaseContainer } from '@usewaypoint/block-container';
 
 import { useCurrentBlockId } from '../../editor/EditorBlock';
-import { setDocument, setSelectedBlockId, useDocument } from '../../editor/EditorContext';
+import { setDocument, useDocument } from '../../editor/EditorContext';
 import EditorChildrenIds from '../helpers/EditorChildrenIds';
 
 import { ContainerProps } from './ContainerPropsSchema';
@@ -18,9 +18,8 @@ export default function ContainerEditor({ style, props }: ContainerProps) {
     <BaseContainer style={style}>
       <EditorChildrenIds
         childrenIds={childrenIds}
-        onChange={({ block, blockId, childrenIds }) => {
+        onChange={(childrenIds) => {
           setDocument({
-            [blockId]: block,
             [currentBlockId]: {
               type: 'Container',
               data: {
@@ -29,7 +28,6 @@ export default function ContainerEditor({ style, props }: ContainerProps) {
               },
             },
           });
-          setSelectedBlockId(blockId);
         }}
       />
     </BaseContainer>

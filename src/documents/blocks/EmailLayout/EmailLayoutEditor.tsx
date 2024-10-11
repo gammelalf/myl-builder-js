@@ -80,9 +80,8 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
             <td>
               <EditorChildrenIds
                 childrenIds={childrenIds}
-                onChange={({ block, blockId, childrenIds }) => {
+                onChange={(childrenIds) => {
                   setDocument({
-                    [blockId]: block,
                     [currentBlockId]: {
                       type: 'EmailLayout',
                       data: {
@@ -91,7 +90,6 @@ export default function EmailLayoutEditor(props: EmailLayoutProps) {
                       },
                     },
                   });
-                  setSelectedBlockId(blockId);
                 }}
               />
             </td>
