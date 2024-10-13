@@ -5,6 +5,7 @@ import {EditorBlock, EditorBlockContext, TEditorBlock} from '../../../editor/cor
 import AddBlockButton from './AddBlockMenu';
 import {setDocument, setSelectedBlockId, useDocument} from "../../../editor/EditorContext";
 import {EDIT_SIBLINGS_CONTEXT} from "../block-wrappers/TuneMenu";
+import EditorBlockWrapper from "../block-wrappers/EditorBlockWrapper";
 
 function createBlock(block: TEditorBlock): string {
   const blockId = `block-${Date.now()}`;
@@ -72,7 +73,9 @@ export default function EditorChildrenIds(props: EditorChildrenIdsProps) {
               },
             }}>
               <EditorBlockContext.Provider value={childId}>
-                <EditorBlock {...document[childId ?? console.warn(`Unknown block ${childId}`)]} />
+                <EditorBlockWrapper>
+                  <EditorBlock {...document[childId ?? console.warn(`Unknown block ${childId}`)]} />
+                </EditorBlockWrapper>
               </EditorBlockContext.Provider>
             </EDIT_SIBLINGS_CONTEXT.Provider>
           </Fragment>

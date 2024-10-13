@@ -21,56 +21,31 @@ import ContainerEditor from '../blocks/Container/ContainerEditor';
 import ContainerPropsSchema from '../blocks/Container/ContainerPropsSchema';
 import EmailLayoutEditor from '../blocks/EmailLayout/EmailLayoutEditor';
 import EmailLayoutPropsSchema from '../blocks/EmailLayout/EmailLayoutPropsSchema';
-import EditorBlockWrapper from '../blocks/helpers/block-wrappers/EditorBlockWrapper';
 
 const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
   Avatar: {
     schema: AvatarPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Avatar {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Avatar {...props} />,
   },
   Button: {
     schema: ButtonPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Button {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Button {...props} />,
   },
   Container: {
     schema: ContainerPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <ContainerEditor {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <ContainerEditor {...props} />,
   },
   ColumnsContainer: {
     schema: ColumnsContainerPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <ColumnsContainerEditor {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <ColumnsContainerEditor {...props} />,
   },
   Heading: {
     schema: HeadingPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Heading {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Heading {...props} />,
   },
   Html: {
     schema: HtmlPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Html {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Html {...props} />,
   },
   Image: {
     schema: ImagePropsSchema,
@@ -82,40 +57,24 @@ const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
           url: data.props?.url ?? 'https://placehold.co/600x400@2x/F8F8F8/CCC?text=Your%20image',
         },
       };
-      return (
-        <EditorBlockWrapper>
-          <Image {...props} />
-        </EditorBlockWrapper>
-      );
+      return <Image {...props} />;
     },
   },
   Text: {
     schema: TextPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Text {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Text {...props} />,
   },
   EmailLayout: {
     schema: EmailLayoutPropsSchema,
-    Component: (p) => <EmailLayoutEditor {...p} />,
+    Component: (props) => <EmailLayoutEditor {...props} />,
   },
   Spacer: {
     schema: SpacerPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Spacer {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Spacer {...props} />,
   },
   Divider: {
     schema: DividerPropsSchema,
-    Component: (props) => (
-      <EditorBlockWrapper>
-        <Divider {...props} />
-      </EditorBlockWrapper>
-    ),
+    Component: (props) => <Divider {...props} />,
   },
 });
 
