@@ -125,3 +125,6 @@ export const EditorConfigurationSchema = z.record(z.string(), EditorBlockSchema)
 
 export type TEditorBlock = z.infer<typeof EditorBlockSchema>;
 export type TEditorConfiguration = Record<string, TEditorBlock>;
+
+export const EditorBlockContext = React.createContext<string | null>(null);
+export const useCurrentBlockId = () => React.useContext(EditorBlockContext)!;

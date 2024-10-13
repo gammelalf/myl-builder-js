@@ -4,7 +4,6 @@ import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
 import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
 import { Reader } from '@usewaypoint/email-builder';
 
-import EditorBlock from '../../documents/editor/EditorBlock';
 import {
   setSelectedScreenSize,
   useDocument,
@@ -20,6 +19,7 @@ import ImportJson from './ImportJson';
 import JsonPanel from './JsonPanel';
 import MainTabsGroup from './MainTabsGroup';
 import ShareButton from './ShareButton';
+import {EditorBlock, EditorBlockContext} from "../../documents/editor/core";
 
 export default function TemplatePanel() {
   const document = useDocument();
@@ -56,7 +56,9 @@ export default function TemplatePanel() {
       case 'editor':
         return (
           <Box sx={mainBoxSx}>
-            <EditorBlock id="root" />
+            <EditorBlockContext.Provider value={"root"}>
+              <EditorBlock {...document.root} />
+            </EditorBlockContext.Provider>
           </Box>
         );
       case 'preview':

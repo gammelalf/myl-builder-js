@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import { Box } from '@mui/material';
 
-import { useCurrentBlockId } from '../../../editor/EditorBlock';
 import { setSelectedBlockId, useSelectedBlockId } from '../../../editor/EditorContext';
 
 import TuneMenu from './TuneMenu';
+import {useCurrentBlockId} from "../../../editor/core";
 
 type TEditorBlockWrapperProps = {
   children: JSX.Element;

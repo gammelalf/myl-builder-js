@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 
-import { TEditorBlock } from '../../../editor/core';
-import EditorBlock from '../../../editor/EditorBlock';
+import {EditorBlock, EditorBlockContext, TEditorBlock} from '../../../editor/core';
 
 import AddBlockButton from './AddBlockMenu';
-import {setDocument, setSelectedBlockId} from "../../../editor/EditorContext";
+import {setDocument, setSelectedBlockId, useDocument} from "../../../editor/EditorContext";
 import {EDIT_SIBLINGS_CONTEXT} from "../block-wrappers/TuneMenu";
 
 function createBlock(block: TEditorBlock): string {
@@ -21,6 +20,7 @@ export type EditorChildrenIdsProps = {
   onChange: (childrenIds: string[]) => void;
 };
 export default function EditorChildrenIds(props: EditorChildrenIdsProps) {
+  const document = useDocument();
   const { onChange } = props;
   const childrenIds = props.childrenIds ?? [];
 
@@ -66,10 +66,14 @@ export default function EditorChildrenIds(props: EditorChildrenIdsProps) {
                   ...childrenIds.slice(0, index),
                   ...childrenIds.slice(index + 1),
                 ]);
+                // TODO: find better solution
+                // @ts-ignore
                 setDocument({[childId]: undefined});
               },
             }}>
-              <EditorBlock id={childId} />
+              <EditorBlockContext.Provider value={childId}>
+                <EditorBlock {...document[childId ?? console.warn(`Unknown block ${childId}`)]} />
+              </EditorBlockContext.Provider>
             </EDIT_SIBLINGS_CONTEXT.Provider>
           </Fragment>
         ))}
