@@ -12,9 +12,6 @@ type TValue = {
   selectedSidebarTab: 'block-configuration' | 'styles';
   selectedMainTab: 'editor' | 'preview' | 'json' | 'html';
   selectedScreenSize: 'desktop' | 'mobile';
-
-  inspectorDrawerOpen: boolean;
-  samplesDrawerOpen: boolean;
 };
 
 const editorStateStore = create<TValue>(() => ({
@@ -23,9 +20,6 @@ const editorStateStore = create<TValue>(() => ({
   selectedSidebarTab: 'styles',
   selectedMainTab: 'editor',
   selectedScreenSize: 'desktop',
-
-  inspectorDrawerOpen: true,
-  samplesDrawerOpen: true,
 }));
 
 export function useDocument() {
@@ -52,20 +46,14 @@ export function useSelectedSidebarTab() {
   return editorStateStore((s) => s.selectedSidebarTab);
 }
 
-export function useInspectorDrawerOpen() {
-  return editorStateStore((s) => s.inspectorDrawerOpen);
-}
-
-export function useSamplesDrawerOpen() {
-  return editorStateStore((s) => s.samplesDrawerOpen);
-}
-
 export function setSelectedBlockId(selectedBlockId: TValue['selectedBlockId']) {
   const selectedSidebarTab = selectedBlockId === null ? 'styles' : 'block-configuration';
   const options: Partial<TValue> = {};
+  /* TODO: find an alternative way
   if (selectedBlockId !== null) {
     options.inspectorDrawerOpen = true;
   }
+  */
   return editorStateStore.setState({
     selectedBlockId,
     selectedSidebarTab,
@@ -93,16 +81,6 @@ export function setDocument(document: Omit<Document, "root">) {
       ...document,
     },
   });
-}
-
-export function toggleInspectorDrawerOpen() {
-  const inspectorDrawerOpen = !editorStateStore.getState().inspectorDrawerOpen;
-  return editorStateStore.setState({ inspectorDrawerOpen });
-}
-
-export function toggleSamplesDrawerOpen() {
-  const samplesDrawerOpen = !editorStateStore.getState().samplesDrawerOpen;
-  return editorStateStore.setState({ samplesDrawerOpen });
 }
 
 export function setSelectedScreenSize(selectedScreenSize: TValue['selectedScreenSize']) {

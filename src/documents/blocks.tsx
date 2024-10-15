@@ -249,5 +249,5 @@ function assertNonEmpty<T>(array: Array<T>): [T, ...Array<T>] {
 export const BlockSchema = z.discriminatedUnion('type', assertNonEmpty(Object.keys(BLOCKS).map((key: string) => key as keyof BLOCKS).map((key) => createBlockPropsSchemaOption(key, BLOCKS[key]))));
 export type Block = { [K in keyof BLOCKS]: { type: K, data: z.infer<BLOCKS[K]['schema']> } }[keyof BLOCKS];
 
-export const DocumentSchema = z.object({ root: BlockSchema }).catchall(BlockSchema);
-export type Document = { root: Block } & Record<string, Block>;
+export const DocumentSchema = z.object({ root: z.object({ type: z.literal('EmailLayout'), data: EmailLayoutPropsSchema }) }).catchall(BlockSchema);
+export type Document = { root: Extract<Block, {type: 'EmailLayout'}> } & Record<string, Block>;

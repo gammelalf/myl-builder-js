@@ -1,7 +1,14 @@
 import React from 'react';
 
-import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
-import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
+import {
+  AppRegistrationOutlined,
+  FirstPageOutlined,
+  LastPageOutlined,
+  MenuOutlined,
+  MonitorOutlined,
+  PhoneIphoneOutlined
+} from '@mui/icons-material';
+import {Box, IconButton, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip} from '@mui/material';
 
 import EditorBlock, {
   EditorBlockContext,
@@ -10,8 +17,6 @@ import EditorBlock, {
   useSelectedMainTab,
   useSelectedScreenSize,
 } from '../../documents/editor';
-import ToggleInspectorPanelButton from '../InspectorDrawer/ToggleInspectorPanelButton';
-import ToggleSamplesPanelButton from '../SamplesDrawer/ToggleSamplesPanelButton';
 
 import DownloadJson from './DownloadJson';
 import HtmlPanel from './HtmlPanel';
@@ -21,7 +26,14 @@ import MainTabsGroup from './MainTabsGroup';
 import ShareButton from './ShareButton';
 import ReaderBlock from "../../documents/reader";
 
-export default function TemplatePanel() {
+type TemplatePanelProps = {
+  isInspectorDrawerOpen: boolean;
+  isSamplesDrawerOpen: boolean;
+  toggleInspectorDrawer: () => void;
+  toggleSamplesDrawer: () => void;
+};
+
+export default function TemplatePanel(props: TemplatePanelProps) {
   const document = useDocument();
   const selectedMainTab = useSelectedMainTab();
   const selectedScreenSize = useSelectedScreenSize();
@@ -91,7 +103,9 @@ export default function TemplatePanel() {
         justifyContent="space-between"
         alignItems="center"
       >
-        <ToggleSamplesPanelButton />
+        <IconButton onClick={props.toggleSamplesDrawer}>
+          {props.isSamplesDrawerOpen ? <FirstPageOutlined fontSize="small" /> : <MenuOutlined fontSize="small" />}
+        </IconButton>
         <Stack px={2} direction="row" gap={2} width="100%" justifyContent="space-between" alignItems="center">
           <Stack direction="row" spacing={2}>
             <MainTabsGroup />
@@ -114,7 +128,9 @@ export default function TemplatePanel() {
             <ShareButton />
           </Stack>
         </Stack>
-        <ToggleInspectorPanelButton />
+        <IconButton onClick={props.toggleInspectorDrawer}>
+          {props.isInspectorDrawerOpen ? <LastPageOutlined fontSize="small" /> : <AppRegistrationOutlined fontSize="small" />}
+        </IconButton>
       </Stack>
       <Box sx={{ height: 'calc(100vh - 49px)', overflow: 'auto', minWidth: 370 }}>{renderMainPanel()}</Box>
     </>

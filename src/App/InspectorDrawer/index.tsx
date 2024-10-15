@@ -2,23 +2,30 @@ import React from 'react';
 
 import { Box, Drawer, Tab, Tabs } from '@mui/material';
 
-import { setSidebarTab, useInspectorDrawerOpen, useSelectedSidebarTab } from '../../documents/editor';
+import {setDocument, setSidebarTab, useDocument, useSelectedSidebarTab} from '../../documents/editor';
 
 import ConfigurationPanel from './ConfigurationPanel';
-import StylesPanel from './StylesPanel';
+import EmailLayoutSidebarPanel from "./ConfigurationPanel/input-panels/EmailLayoutSidebarPanel";
 
 export const INSPECTOR_DRAWER_WIDTH = 320;
 
-export default function InspectorDrawer() {
+type InspectorDrawerProps = {
+  open: boolean;
+};
+
+export default function InspectorDrawer(props: InspectorDrawerProps) {
   const selectedSidebarTab = useSelectedSidebarTab();
-  const inspectorDrawerOpen = useInspectorDrawerOpen();
+  const document = useDocument();
 
   const renderCurrentSidebarPanel = () => {
     switch (selectedSidebarTab) {
       case 'block-configuration':
         return <ConfigurationPanel />;
       case 'styles':
-        return <StylesPanel />;
+        return <EmailLayoutSidebarPanel
+            data={document.root.data}
+            setData={(data) => setDocument({ root: { type: 'EmailLayout', data } })}
+        />;
     }
   };
 
@@ -26,9 +33,9 @@ export default function InspectorDrawer() {
     <Drawer
       variant="persistent"
       anchor="right"
-      open={inspectorDrawerOpen}
+      open={props.open}
       sx={{
-        width: inspectorDrawerOpen ? INSPECTOR_DRAWER_WIDTH : 0,
+        width: props.open ? INSPECTOR_DRAWER_WIDTH : 0,
       }}
     >
       <Box sx={{ width: INSPECTOR_DRAWER_WIDTH, height: 49, borderBottom: 1, borderColor: 'divider' }}>

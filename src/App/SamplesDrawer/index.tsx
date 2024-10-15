@@ -2,23 +2,23 @@ import React from 'react';
 
 import { Box, Button, Divider, Drawer, Link, Stack, Typography } from '@mui/material';
 
-import { useSamplesDrawerOpen } from '../../documents/editor';
-
 import SidebarButton from './SidebarButton';
 import logo from './waypoint.svg';
 
 export const SAMPLES_DRAWER_WIDTH = 240;
 
-export default function SamplesDrawer() {
-  const samplesDrawerOpen = useSamplesDrawerOpen();
+type SamplesDrawerProps = {
+  open: boolean;
+};
 
+export default function SamplesDrawer(props: SamplesDrawerProps) {
   return (
     <Drawer
       variant="persistent"
       anchor="left"
-      open={samplesDrawerOpen}
+      open={props.open}
       sx={{
-        width: samplesDrawerOpen ? SAMPLES_DRAWER_WIDTH : 0,
+        width: props.open ? SAMPLES_DRAWER_WIDTH : 0,
       }}
     >
       <Stack spacing={3} py={1} px={2} width={SAMPLES_DRAWER_WIDTH} justifyContent="space-between" height="100%">
