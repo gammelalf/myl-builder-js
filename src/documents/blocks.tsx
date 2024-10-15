@@ -24,6 +24,17 @@ import {
 import EmailLayoutReader from "./blocks/EmailLayout/EmailLayoutReader";
 import ColumnsContainerReader from "./blocks/ColumnsContainer/ColumnsContainerReader";
 import ContainerReader from "./blocks/Container/ContainerReader";
+import AvatarSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/AvatarSidebarPanel";
+import ButtonSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/ButtonSidebarPanel";
+import ContainerSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/ContainerSidebarPanel";
+import ColumnsContainerPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/ColumnsContainerSidebarPanel";
+import HeadingSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/HeadingSidebarPanel";
+import HtmlSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/HtmlSidebarPanel";
+import ImageSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/ImageSidebarPanel";
+import TextSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/TextSidebarPanel";
+import SpacerSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/SpacerSidebarPanel";
+import DividerSidebarPanel from "../App/InspectorDrawer/ConfigurationPanel/input-panels/DividerSidebarPanel";
+import EmailLayoutSidebarFields from "../App/InspectorDrawer/ConfigurationPanel/input-panels/EmailLayoutSidebarPanel";
 
 const constrainBlocksType: <T extends Record<string, z.AnyZodObject>>(x: {
     [K in keyof T]: {
@@ -35,6 +46,7 @@ const constrainBlocksType: <T extends Record<string, z.AnyZodObject>>(x: {
         }
         Editor: React.ComponentType<z.infer<T[K]>>,
         Reader: React.ComponentType<z.infer<T[K]>>,
+        Inspector: React.ComponentType<{data: z.infer<T[K]>, setData: (newData: z.infer<T[K]>) => void}>,
     };
 }) => typeof x = (x) => x;
 
@@ -52,8 +64,9 @@ export const BLOCKS = constrainBlocksType({
                 style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
             }),
         },
-        Editor: (props) => <Avatar {...props} />,
-        Reader: (props) => <Avatar {...props} />,
+        Editor: Avatar,
+        Reader: Avatar,
+        Inspector: AvatarSidebarPanel,
     },
     Button: {
         schema: ButtonPropsSchema,
@@ -68,8 +81,9 @@ export const BLOCKS = constrainBlocksType({
                 style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
             }),
         },
-        Editor: (props) => <Button {...props} />,
-        Reader: (props) => <Button {...props} />,
+        Editor: Button,
+        Reader: Button,
+        Inspector: ButtonSidebarPanel,
     },
     Container: {
         schema: ContainerPropsSchema,
@@ -80,8 +94,9 @@ export const BLOCKS = constrainBlocksType({
                 style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
             }),
         },
-        Editor: (props) => <ContainerEditor {...props} />,
-        Reader: (props) => <ContainerReader {...props} />,
+        Editor: ContainerEditor,
+        Reader: ContainerReader,
+        Inspector: ContainerSidebarPanel,
     },
     ColumnsContainer: {
         schema: ColumnsContainerPropsSchema,
@@ -101,8 +116,9 @@ export const BLOCKS = constrainBlocksType({
                 style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
             }),
         },
-        Editor: (props) => <ColumnsContainerEditor {...props} />,
-        Reader: (props) => <ColumnsContainerReader {...props} />,
+        Editor: ColumnsContainerEditor,
+        Reader: ColumnsContainerReader,
+        Inspector: ColumnsContainerPanel,
     },
     Heading: {
         schema: HeadingPropsSchema,
@@ -116,8 +132,9 @@ export const BLOCKS = constrainBlocksType({
                 },
             }),
         },
-        Editor: (props) => <Heading {...props} />,
-        Reader: (props) => <Heading {...props} />,
+        Editor: Heading,
+        Reader: Heading,
+        Inspector: HeadingSidebarPanel,
     },
     Html: {
         schema: HtmlPropsSchema,
@@ -133,8 +150,9 @@ export const BLOCKS = constrainBlocksType({
                 },
             }),
         },
-        Editor: (props) => <Html {...props} />,
-        Reader: (props) => <Html {...props} />,
+        Editor: Html,
+        Reader: Html,
+        Inspector: HtmlSidebarPanel,
     },
     Image: {
         schema: ImagePropsSchema,
@@ -161,7 +179,8 @@ export const BLOCKS = constrainBlocksType({
             };
             return <Image {...props} />;
         },
-        Reader: (props) => <Image {...props} />,
+        Reader: Image,
+        Inspector: ImageSidebarPanel,
     },
     Text: {
         schema: TextPropsSchema,
@@ -176,13 +195,15 @@ export const BLOCKS = constrainBlocksType({
                 },
             }),
         },
-        Editor: (props) => <Text {...props} />,
-        Reader: (props) => <Text {...props} />,
+        Editor: Text,
+        Reader: Text,
+        Inspector: TextSidebarPanel,
     },
     EmailLayout: {
         schema: EmailLayoutPropsSchema,
-        Editor: (props) => <EmailLayoutEditor {...props} />,
-        Reader: (props) => <EmailLayoutReader {...props} />,
+        Editor: EmailLayoutEditor,
+        Reader: EmailLayoutReader,
+        Inspector: EmailLayoutSidebarFields,
     },
     Spacer: {
         schema: SpacerPropsSchema,
@@ -191,8 +212,9 @@ export const BLOCKS = constrainBlocksType({
             icon: <Crop32Outlined />,
             block: () => ({}),
         },
-        Editor: (props) => <Spacer {...props} />,
-        Reader: (props) => <Spacer {...props} />,
+        Editor: Spacer,
+        Reader: Spacer,
+        Inspector: SpacerSidebarPanel,
     },
     Divider: {
         schema: DividerPropsSchema,
@@ -206,8 +228,9 @@ export const BLOCKS = constrainBlocksType({
                 },
             }),
         },
-        Editor: (props) => <Divider {...props} />,
-        Reader: (props) => <Divider {...props} />,
+        Editor: Divider,
+        Reader: Divider,
+        Inspector: DividerSidebarPanel,
     },
 });
 export type BLOCKS = typeof BLOCKS;
