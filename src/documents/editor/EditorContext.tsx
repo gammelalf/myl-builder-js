@@ -2,10 +2,10 @@ import { create } from 'zustand';
 
 import getConfiguration from '../../getConfiguration';
 
-import { TEditorConfiguration } from './core';
+import {Document} from "../blocks";
 
 type TValue = {
-  document: TEditorConfiguration;
+  document: Document;
 
   selectedBlockId: string | null;
   selectedSidebarTab: 'block-configuration' | 'styles';
@@ -84,7 +84,7 @@ export function resetDocument(document: TValue['document']) {
   });
 }
 
-export function setDocument(document: TValue['document']) {
+export function setDocument(document: Omit<Document, "root">) {
   const originalDocument = editorStateStore.getState().document;
   return editorStateStore.setState({
     document: {

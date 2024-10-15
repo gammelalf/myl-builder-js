@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const RESPOND_TO_MESSAGE: TEditorConfiguration = {
+const RESPOND_TO_MESSAGE: Document = {
   root: {
     type: 'EmailLayout',
     data: {

@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const ORDER_ECOMMERCE: TEditorConfiguration = {
+const ORDER_ECOMMERCE: Document = {
   root: {
     type: 'EmailLayout',
     data: {

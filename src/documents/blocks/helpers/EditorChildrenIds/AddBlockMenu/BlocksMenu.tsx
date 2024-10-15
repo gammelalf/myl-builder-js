@@ -2,22 +2,21 @@ import React from 'react';
 
 import { Box, Menu } from '@mui/material';
 
-import { TEditorBlock } from '../../../../editor/core';
-
 import BlockButton from './BlockButton';
 import { BUTTONS } from './buttons';
+import {Block} from "../../../../blocks";
 
 type BlocksMenuProps = {
   anchorEl: HTMLElement | null;
   setAnchorEl: (v: HTMLElement | null) => void;
-  onSelect: (block: TEditorBlock) => void;
+  onSelect: (block: Block) => void;
 };
 export default function BlocksMenu({ anchorEl, setAnchorEl, onSelect }: BlocksMenuProps) {
   const onClose = () => {
     setAnchorEl(null);
   };
 
-  const onClick = (block: TEditorBlock) => {
+  const onClick = (block: Block) => {
     onSelect(block);
     setAnchorEl(null);
   };

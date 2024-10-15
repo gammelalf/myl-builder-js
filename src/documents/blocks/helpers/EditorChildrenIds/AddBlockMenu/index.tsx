@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 
-import { TEditorBlock } from '../../../../editor/core';
-
 import BlocksMenu from './BlocksMenu';
 import DividerButton from './DividerButton';
 import PlaceholderButton from './PlaceholderButton';
+import {Block} from "../../../../blocks";
 
 type Props = {
   placeholder?: boolean;
-  onSelect: (block: TEditorBlock) => void;
+  onSelect: (block: Block) => void;
 };
 export default function AddBlockButton({ onSelect, placeholder }: Props) {
   const [menuAnchorEl, setMenuAnchorEl] = useState<HTMLElement | null>(null);

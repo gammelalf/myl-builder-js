@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const WELCOME: TEditorConfiguration = {
+const WELCOME: Document = {
   root: {
     type: 'EmailLayout',
     data: {

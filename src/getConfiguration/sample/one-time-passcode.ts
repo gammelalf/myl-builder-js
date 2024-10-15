@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const ONE_TIME_PASSCODE: TEditorConfiguration = {
+const ONE_TIME_PASSCODE: Document = {
   root: {
     type: 'EmailLayout',
     data: {

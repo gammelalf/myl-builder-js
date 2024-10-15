@@ -1,6 +1,6 @@
-import { EditorConfigurationSchema, TEditorConfiguration } from '../../../documents/editor/core';
+import {DocumentSchema, Document} from "../../../documents/blocks";
 
-type TResult = { error: string; data?: undefined } | { data: TEditorConfiguration; error?: undefined };
+type TResult = { error: string; data?: never } | { data: Document; error?: never };
 
 export default function validateTextAreaValue(value: string): TResult {
   let jsonObject = undefined;
@@ -10,7 +10,7 @@ export default function validateTextAreaValue(value: string): TResult {
     return { error: 'Invalid json' };
   }
 
-  const parseResult = EditorConfigurationSchema.safeParse(jsonObject);
+  const parseResult = DocumentSchema.safeParse(jsonObject);
   if (!parseResult.success) {
     return { error: 'Invalid JSON schema' };
   }
@@ -19,5 +19,6 @@ export default function validateTextAreaValue(value: string): TResult {
     return { error: 'Missing "root" node' };
   }
 
+  // @ts-ignore
   return { data: parseResult.data };
 }

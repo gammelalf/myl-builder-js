@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const SUBSCRIPTION_RECEIPT: TEditorConfiguration = {
+const SUBSCRIPTION_RECEIPT: Document = {
   root: {
     type: 'EmailLayout',
     data: {

@@ -12,13 +12,12 @@ import {
   SmartButtonOutlined,
   ViewColumnOutlined,
 } from '@mui/icons-material';
-
-import { TEditorBlock } from '../../../../editor/core';
+import {Block} from "../../../../blocks";
 
 type TButtonProps = {
   label: string;
   icon: JSX.Element;
-  block: () => TEditorBlock;
+  block: () => Block;
 };
 export const BUTTONS: TButtonProps[] = [
   {

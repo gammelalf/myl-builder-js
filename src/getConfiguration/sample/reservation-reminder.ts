@@ -1,6 +1,6 @@
-import { TEditorConfiguration } from '../../documents/editor/core';
+import {Document} from "../../documents/blocks";
 
-const RESERVATION_REMINDER: TEditorConfiguration = {
+const RESERVATION_REMINDER: Document = {
   root: {
     type: 'EmailLayout',
     data: {

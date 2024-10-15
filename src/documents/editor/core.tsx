@@ -1,5 +1,4 @@
 import React from 'react';
-import { z } from 'zod';
 
 import { Avatar, AvatarPropsSchema } from '@usewaypoint/block-avatar';
 import { Button, ButtonPropsSchema } from '@usewaypoint/block-button';
@@ -12,7 +11,6 @@ import { Text, TextPropsSchema } from '@usewaypoint/block-text';
 import {
   buildBlockComponent,
   buildBlockConfigurationDictionary,
-  buildBlockConfigurationSchema,
 } from '@usewaypoint/document-core';
 
 import ColumnsContainerEditor from '../blocks/ColumnsContainer/ColumnsContainerEditor';
@@ -79,11 +77,6 @@ const EDITOR_DICTIONARY = buildBlockConfigurationDictionary({
 });
 
 export const EditorBlock = buildBlockComponent(EDITOR_DICTIONARY);
-export const EditorBlockSchema = buildBlockConfigurationSchema(EDITOR_DICTIONARY);
-export const EditorConfigurationSchema = z.record(z.string(), EditorBlockSchema);
-
-export type TEditorBlock = z.infer<typeof EditorBlockSchema>;
-export type TEditorConfiguration = Record<string, TEditorBlock>;
 
 export const EditorBlockContext = React.createContext<string | null>(null);
 export const useCurrentBlockId = () => React.useContext(EditorBlockContext)!;

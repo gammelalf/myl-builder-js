@@ -1,13 +1,14 @@
 import React, {Fragment} from 'react';
 
-import {EditorBlock, EditorBlockContext, TEditorBlock} from '../../../editor/core';
+import {EditorBlock, EditorBlockContext} from '../../../editor/core';
 
 import AddBlockButton from './AddBlockMenu';
 import {setDocument, setSelectedBlockId, useDocument, useSelectedBlockId} from "../../../editor/EditorContext";
 import {Box, IconButton, Paper, Stack, Tooltip} from "@mui/material";
 import {ArrowDownwardOutlined, ArrowUpwardOutlined, DeleteOutlined} from "@mui/icons-material";
+import {Block} from "../../../blocks";
 
-function createBlock(block: TEditorBlock): string {
+function createBlock(block: Block): string {
   const blockId = `block-${Date.now()}`;
   setDocument({
     [blockId]: block,
@@ -29,11 +30,11 @@ export default function EditorChildrenIds(props: EditorChildrenIdsProps) {
 
   const [hoveredBlock, setHoveredBlock] = React.useState<string>();
 
-  const appendBlock = (block: TEditorBlock) => onChange([
+  const appendBlock = (block: Block) => onChange([
     ...childrenIds, createBlock(block)
   ]);
 
-  const insertBlock = (block: TEditorBlock, index: number) => onChange([
+  const insertBlock = (block: Block, index: number) => onChange([
     ...childrenIds.slice(0, index),
     createBlock(block),
     ...childrenIds.slice(index)
