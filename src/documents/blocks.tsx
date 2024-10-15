@@ -14,42 +14,133 @@ import EmailLayoutPropsSchema from "./blocks/EmailLayout/EmailLayoutPropsSchema"
 import EmailLayoutEditor from "./blocks/EmailLayout/EmailLayoutEditor";
 import {Spacer, SpacerPropsSchema} from "@usewaypoint/block-spacer";
 import {Divider, DividerPropsSchema} from "@usewaypoint/block-divider";
+import {
+    AccountCircleOutlined, Crop32Outlined,
+    HMobiledataOutlined, HorizontalRuleOutlined, HtmlOutlined,
+    ImageOutlined, LibraryAddOutlined,
+    NotesOutlined,
+    SmartButtonOutlined, ViewColumnOutlined
+} from "@mui/icons-material";
 
-type ZodSchemas = Record<string, z.AnyZodObject>;
-type BlocksDeclaration<T extends ZodSchemas> = {
+const constrainBlocksType: <T extends Record<string, z.AnyZodObject>>(x: {
     [K in keyof T]: {
         schema: T[K];
+        creatable?: {
+            label: string;
+            icon: React.ReactNode;
+            block: () => z.infer<T[K]>;
+        }
         Editor: React.ComponentType<z.infer<T[K]>>,
     };
-};
+}) => typeof x = (x) => x;
 
-export const BLOCKS = {
+export const BLOCKS = constrainBlocksType({
     Avatar: {
         schema: AvatarPropsSchema,
+        creatable: {
+            label: 'Avatar',
+            icon: <AccountCircleOutlined />,
+            block: () => ({
+                props: {
+                    imageUrl: 'https://ui-avatars.com/api/?size=128',
+                    shape: 'circle' as const,
+                },
+                style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
+            }),
+        },
         Editor: (props) => <Avatar {...props} />,
     },
     Button: {
         schema: ButtonPropsSchema,
+        creatable: {
+            label: 'Button',
+            icon: <SmartButtonOutlined />,
+            block: () => ({
+                props: {
+                    text: 'Button',
+                    url: 'https://www.usewaypoint.com',
+                },
+                style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
+            }),
+        },
         Editor: (props) => <Button {...props} />,
     },
     Container: {
         schema: ContainerPropsSchema,
+        creatable: {
+            label: 'Container',
+            icon: <LibraryAddOutlined />,
+            block: () => ({
+                style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
+            }),
+        },
         Editor: (props) => <ContainerEditor {...props} />,
     },
     ColumnsContainer: {
         schema: ColumnsContainerPropsSchema,
+        creatable:  {
+            label: 'Columns',
+            icon: <ViewColumnOutlined />,
+            block: () => ({
+                props: {
+                    columnsGap: 16,
+                    columnsCount: 3 as const,
+                    columns: [
+                        { childrenIds: [] },
+                        { childrenIds: [] },
+                        { childrenIds: [] }
+                    ] as [{ childrenIds: string[] }, { childrenIds: string[] }, { childrenIds: string[] }],
+                },
+                style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
+            }),
+        },
         Editor: (props) => <ColumnsContainerEditor {...props} />,
     },
     Heading: {
         schema: HeadingPropsSchema,
+        creatable: {
+            label: 'Heading',
+            icon: <HMobiledataOutlined />,
+            block: () => ({
+                props: { text: 'Hello friend' },
+                style: {
+                    padding: { top: 16, bottom: 16, left: 24, right: 24 },
+                },
+            }),
+        },
         Editor: (props) => <Heading {...props} />,
     },
     Html: {
         schema: HtmlPropsSchema,
+        creatable: {
+            label: 'Html',
+            icon: <HtmlOutlined />,
+            block: () => ({
+                props: { contents: '<strong>Hello world</strong>' },
+                style: {
+                    fontSize: 16,
+                    textAlign: null,
+                    padding: { top: 16, bottom: 16, left: 24, right: 24 },
+                },
+            }),
+        },
         Editor: (props) => <Html {...props} />,
     },
     Image: {
         schema: ImagePropsSchema,
+        creatable: {
+            label: 'Image',
+            icon: <ImageOutlined />,
+            block: () => ({
+                props: {
+                    url: 'https://assets.usewaypoint.com/sample-image.jpg',
+                    alt: 'Sample product',
+                    contentAlignment: 'middle' as const,
+                    linkHref: null,
+                },
+                style: { padding: { top: 16, bottom: 16, left: 24, right: 24 } },
+            }),
+        },
         Editor: (data) => {
             const props = {
                 ...data,
@@ -63,6 +154,17 @@ export const BLOCKS = {
     },
     Text: {
         schema: TextPropsSchema,
+        creatable: {
+            label: 'Text',
+            icon: <NotesOutlined />,
+            block: () => ({
+                props: { text: 'My new text block' },
+                style: {
+                    padding: { top: 16, bottom: 16, left: 24, right: 24 },
+                    fontWeight: 'normal' as const,
+                },
+            }),
+        },
         Editor: (props) => <Text {...props} />,
     },
     EmailLayout: {
@@ -71,14 +173,29 @@ export const BLOCKS = {
     },
     Spacer: {
         schema: SpacerPropsSchema,
+        creatable: {
+            label: 'Spacer',
+            icon: <Crop32Outlined />,
+            block: () => ({}),
+        },
         Editor: (props) => <Spacer {...props} />,
     },
     Divider: {
         schema: DividerPropsSchema,
+        creatable: {
+            label: 'Divider',
+            icon: <HorizontalRuleOutlined />,
+            block: () => ({
+                style: { padding: { top: 16, right: 0, bottom: 16, left: 0 } },
+                props: {
+                    lineColor: '#CCCCCC',
+                },
+            }),
+        },
         Editor: (props) => <Divider {...props} />,
     },
-} satisfies BlocksDeclaration<any>;
-type BLOCKS = typeof BLOCKS;
+});
+export type BLOCKS = typeof BLOCKS;
 
 function createBlockPropsSchemaOption<K extends keyof BLOCKS>(type: K, {schema}: BLOCKS[K]) {
     return z.object({

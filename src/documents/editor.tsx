@@ -114,5 +114,6 @@ export const useCurrentBlockId = () => React.useContext(EditorBlockContext)!;
 
 export default function EditorBlock(props: Block) {
   const Editor = BLOCKS[props.type].Editor;
+  // @ts-ignore
   return <Editor {...props.data} />
 }

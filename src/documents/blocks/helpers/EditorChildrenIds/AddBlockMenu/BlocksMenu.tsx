@@ -3,8 +3,21 @@ import React from 'react';
 import { Box, Menu } from '@mui/material';
 
 import BlockButton from './BlockButton';
-import { BUTTONS } from './buttons';
-import {Block} from "../../../../blocks";
+import {Block, BLOCKS} from "../../../../blocks";
+
+const BUTTONS: Array<{
+  label: string;
+  icon: React.ReactNode;
+  block: () => Block;
+}> = Object.entries(BLOCKS).flatMap(([type, declaration]) => {
+  if (!declaration.creatable) return [];
+  const {label, icon, block} = declaration.creatable;
+  return [{
+    label,
+    icon,
+    block: () => ({type, data: block()} as Block),
+  }];
+});
 
 type BlocksMenuProps = {
   anchorEl: HTMLElement | null;
