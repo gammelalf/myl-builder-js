@@ -5,20 +5,6 @@ import { Box, Menu } from '@mui/material';
 import BlockButton from './BlockButton';
 import {Block, BLOCKS} from "../../../../blocks";
 
-const BUTTONS: Array<{
-  label: string;
-  icon: React.ReactNode;
-  block: () => Block;
-}> = Object.entries(BLOCKS).flatMap(([type, declaration]) => {
-  if (!declaration.creatable) return [];
-  const {label, icon, block} = declaration.creatable;
-  return [{
-    label,
-    icon,
-    block: () => ({type, data: block()} as Block),
-  }];
-});
-
 type BlocksMenuProps = {
   anchorEl: HTMLElement | null;
   setAnchorEl: (v: HTMLElement | null) => void;
@@ -37,6 +23,20 @@ export default function BlocksMenu({ anchorEl, setAnchorEl, onSelect }: BlocksMe
   if (anchorEl === null) {
     return null;
   }
+
+  const BUTTONS: Array<{
+    label: string;
+    icon: React.ReactNode;
+    block: () => Block;
+  }> = Object.entries(BLOCKS).flatMap(([type, declaration]) => {
+    if (!declaration.creatable) return [];
+    const {label, icon, block} = declaration.creatable;
+    return [{
+      label,
+      icon,
+      block: () => ({type, data: block()} as Block),
+    }];
+  });
 
   return (
     <Menu

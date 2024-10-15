@@ -21,6 +21,9 @@ import {
     NotesOutlined,
     SmartButtonOutlined, ViewColumnOutlined
 } from "@mui/icons-material";
+import EmailLayoutReader from "./blocks/EmailLayout/EmailLayoutReader";
+import ColumnsContainerReader from "./blocks/ColumnsContainer/ColumnsContainerReader";
+import ContainerReader from "./blocks/Container/ContainerReader";
 
 const constrainBlocksType: <T extends Record<string, z.AnyZodObject>>(x: {
     [K in keyof T]: {
@@ -31,6 +34,7 @@ const constrainBlocksType: <T extends Record<string, z.AnyZodObject>>(x: {
             block: () => z.infer<T[K]>;
         }
         Editor: React.ComponentType<z.infer<T[K]>>,
+        Reader: React.ComponentType<z.infer<T[K]>>,
     };
 }) => typeof x = (x) => x;
 
@@ -49,6 +53,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Avatar {...props} />,
+        Reader: (props) => <Avatar {...props} />,
     },
     Button: {
         schema: ButtonPropsSchema,
@@ -64,6 +69,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Button {...props} />,
+        Reader: (props) => <Button {...props} />,
     },
     Container: {
         schema: ContainerPropsSchema,
@@ -75,6 +81,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <ContainerEditor {...props} />,
+        Reader: (props) => <ContainerReader {...props} />,
     },
     ColumnsContainer: {
         schema: ColumnsContainerPropsSchema,
@@ -95,6 +102,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <ColumnsContainerEditor {...props} />,
+        Reader: (props) => <ColumnsContainerReader {...props} />,
     },
     Heading: {
         schema: HeadingPropsSchema,
@@ -109,6 +117,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Heading {...props} />,
+        Reader: (props) => <Heading {...props} />,
     },
     Html: {
         schema: HtmlPropsSchema,
@@ -125,6 +134,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Html {...props} />,
+        Reader: (props) => <Html {...props} />,
     },
     Image: {
         schema: ImagePropsSchema,
@@ -151,6 +161,7 @@ export const BLOCKS = constrainBlocksType({
             };
             return <Image {...props} />;
         },
+        Reader: (props) => <Image {...props} />,
     },
     Text: {
         schema: TextPropsSchema,
@@ -166,10 +177,12 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Text {...props} />,
+        Reader: (props) => <Text {...props} />,
     },
     EmailLayout: {
         schema: EmailLayoutPropsSchema,
         Editor: (props) => <EmailLayoutEditor {...props} />,
+        Reader: (props) => <EmailLayoutReader {...props} />,
     },
     Spacer: {
         schema: SpacerPropsSchema,
@@ -179,6 +192,7 @@ export const BLOCKS = constrainBlocksType({
             block: () => ({}),
         },
         Editor: (props) => <Spacer {...props} />,
+        Reader: (props) => <Spacer {...props} />,
     },
     Divider: {
         schema: DividerPropsSchema,
@@ -193,6 +207,7 @@ export const BLOCKS = constrainBlocksType({
             }),
         },
         Editor: (props) => <Divider {...props} />,
+        Reader: (props) => <Divider {...props} />,
     },
 });
 export type BLOCKS = typeof BLOCKS;
