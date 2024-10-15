@@ -23,7 +23,7 @@ type BlocksDeclaration<T extends ZodSchemas> = {
     };
 };
 
-const BLOCKS = {
+export const BLOCKS = {
     Avatar: {
         schema: AvatarPropsSchema,
         Editor: (props) => <Avatar {...props} />,

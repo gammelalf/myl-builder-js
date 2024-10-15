@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { IosShareOutlined } from '@mui/icons-material';
 import { IconButton, Snackbar, Tooltip } from '@mui/material';
 
-import { useDocument } from '../../documents/editor/EditorContext';
+import { useDocument } from '../../documents/editor';
 
 export default function ShareButton() {
   const document = useDocument();

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Button, Divider, Drawer, Link, Stack, Typography } from '@mui/material';
 
-import { useSamplesDrawerOpen } from '../../documents/editor/EditorContext';
+import { useSamplesDrawerOpen } from '../../documents/editor';
 
 import SidebarButton from './SidebarButton';
 import logo from './waypoint.svg';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { setDocument, useDocument } from '../../documents/editor/EditorContext';
+import { setDocument, useDocument } from '../../documents/editor';
 
 import EmailLayoutSidebarPanel from './ConfigurationPanel/input-panels/EmailLayoutSidebarPanel';
 

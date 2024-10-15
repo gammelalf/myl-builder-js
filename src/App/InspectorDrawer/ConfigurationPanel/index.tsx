@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Typography } from '@mui/material';
 
-import { setDocument, useDocument, useSelectedBlockId } from '../../../documents/editor/EditorContext';
+import { setDocument, useDocument, useSelectedBlockId } from '../../../documents/editor';
 
 import AvatarSidebarPanel from './input-panels/AvatarSidebarPanel';
 import ButtonSidebarPanel from './input-panels/ButtonSidebarPanel';

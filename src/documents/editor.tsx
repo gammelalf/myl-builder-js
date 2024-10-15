@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 
-import getConfiguration from '../../getConfiguration';
+import getConfiguration from '../getConfiguration';
 
-import {Document} from "../blocks";
+import {Block, BLOCKS, Document} from "./blocks";
+import React from "react";
 
 type TValue = {
   document: Document;
@@ -106,4 +107,12 @@ export function toggleSamplesDrawerOpen() {
 
 export function setSelectedScreenSize(selectedScreenSize: TValue['selectedScreenSize']) {
   return editorStateStore.setState({ selectedScreenSize });
+}
+
+export const EditorBlockContext = React.createContext<string | null>(null);
+export const useCurrentBlockId = () => React.useContext(EditorBlockContext)!;
+
+export default function EditorBlock(props: Block) {
+  const Editor = BLOCKS[props.type].Editor;
+  return <Editor {...props.data} />
 }

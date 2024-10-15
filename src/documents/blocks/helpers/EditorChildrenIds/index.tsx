@@ -1,9 +1,9 @@
 import React, {Fragment} from 'react';
 
-import {EditorBlock, EditorBlockContext} from '../../../editor/core';
+import EditorBlock, {EditorBlockContext} from '../../../editor';
 
 import AddBlockButton from './AddBlockMenu';
-import {setDocument, setSelectedBlockId, useDocument, useSelectedBlockId} from "../../../editor/EditorContext";
+import {setDocument, setSelectedBlockId, useDocument, useSelectedBlockId} from "../../../editor";
 import {Box, IconButton, Paper, Stack, Tooltip} from "@mui/material";
 import {ArrowDownwardOutlined, ArrowUpwardOutlined, DeleteOutlined} from "@mui/icons-material";
 import {Block} from "../../../blocks";

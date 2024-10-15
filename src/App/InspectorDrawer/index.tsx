@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Box, Drawer, Tab, Tabs } from '@mui/material';
 
-import { setSidebarTab, useInspectorDrawerOpen, useSelectedSidebarTab } from '../../documents/editor/EditorContext';
+import { setSidebarTab, useInspectorDrawerOpen, useSelectedSidebarTab } from '../../documents/editor';
 
 import ConfigurationPanel from './ConfigurationPanel';
 import StylesPanel from './StylesPanel';

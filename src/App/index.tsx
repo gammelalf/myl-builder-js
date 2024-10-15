@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Stack, useTheme } from '@mui/material';
 
-import { useInspectorDrawerOpen, useSamplesDrawerOpen } from '../documents/editor/EditorContext';
+import { useInspectorDrawerOpen, useSamplesDrawerOpen } from '../documents/editor';
 
 import InspectorDrawer, { INSPECTOR_DRAWER_WIDTH } from './InspectorDrawer';
 import SamplesDrawer, { SAMPLES_DRAWER_WIDTH } from './SamplesDrawer';

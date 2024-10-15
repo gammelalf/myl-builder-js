@@ -4,12 +4,13 @@ import { MonitorOutlined, PhoneIphoneOutlined } from '@mui/icons-material';
 import { Box, Stack, SxProps, ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material';
 import { Reader } from '@usewaypoint/email-builder';
 
-import {
+import EditorBlock, {
+  EditorBlockContext,
   setSelectedScreenSize,
   useDocument,
   useSelectedMainTab,
   useSelectedScreenSize,
-} from '../../documents/editor/EditorContext';
+} from '../../documents/editor';
 import ToggleInspectorPanelButton from '../InspectorDrawer/ToggleInspectorPanelButton';
 import ToggleSamplesPanelButton from '../SamplesDrawer/ToggleSamplesPanelButton';
 
@@ -19,7 +20,6 @@ import ImportJson from './ImportJson';
 import JsonPanel from './JsonPanel';
 import MainTabsGroup from './MainTabsGroup';
 import ShareButton from './ShareButton';
-import {EditorBlock, EditorBlockContext} from "../../documents/editor/core";
 
 export default function TemplatePanel() {
   const document = useDocument();

@@ -2,11 +2,10 @@ import React from 'react';
 
 import { Container as BaseContainer } from '@usewaypoint/block-container';
 
-import { setDocument, useDocument } from '../../editor/EditorContext';
+import { setDocument, useDocument, useCurrentBlockId } from '../../editor';
 import EditorChildrenIds from '../helpers/EditorChildrenIds';
 
 import { ContainerProps } from './ContainerPropsSchema';
-import {useCurrentBlockId} from "../../editor/core";
 
 export default function ContainerEditor({ style, props }: ContainerProps) {
   const childrenIds = props?.childrenIds ?? [];

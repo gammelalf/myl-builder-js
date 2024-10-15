@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { resetDocument } from '../../../documents/editor/EditorContext';
+import { resetDocument } from '../../../documents/editor';
 
 import validateJsonStringValue from './validateJsonStringValue';
 
